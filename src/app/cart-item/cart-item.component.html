@@ -1,0 +1,13 @@
+
+<li class="list-group-item d-flex justify-content-between align-items-start bg-secondary border-none">
+    <div class="ms-2 me-auto">
+    <div class="fw-bold">{{cartItem?.book?.title}} </div>
+    {{cartItem?.book?.price?.displayValue}} EUR
+    </div>
+    <div class="fw-normal d-flex align-items-enter">
+        <button class="btn btn-sm btn-primary mr-1 badge" (click)="decreaseQuantity(cartItem!)" >-</button>
+        <span class="fw-normal mt-1 m-2">{{cartItem?.quantity}}</span>
+        <button class="btn btn-sm btn-primary ml-1 badge" (click)="increaseQuantity(cartItem!)">+</button>
+    </div>
+    <span class="badge bg-danger rounded-pill ms-2"><a (click)="removeFromCart(cartItem!)" class="remove text-white">x</a></span>
+</li>

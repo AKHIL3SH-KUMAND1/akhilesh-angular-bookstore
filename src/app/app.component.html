@@ -1,0 +1,40 @@
+<header>
+  <!-- <app-navbar></app-navbar> -->
+  <nav class="navbar text-white sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="#">
+        <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+        BookStore
+      </a>
+      <form class="d-flex" role="search" [formGroup]="searchForm">
+        <input formControlName="title" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button  (click)="findElementsByName()" class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+</header>
+<div class="container-fluid main-content">
+  <div class="row">
+    <div class="card-Container col-lg-9 col-md-8 col-sm-7 d-flex flex-wrap pt-3 bg-secondary-subtle">
+      <app-card-item *ngFor="let book of displayedBooks" [book]="book" (addToCartEvent)="addToCart($event)"></app-card-item>
+    </div>
+    <div class="cart-Container col-lg-3 col-md-4 col-sm-5 bg-secondary">
+      <div class="container-fluid pt-3">
+        <p class="display-3">Cart</p>
+        <p class="display-6" *ngIf="this.cartItems.length === 0">Your cart feels light!</p>
+        <ol class="list-group list-group-flush list-group-numbered bg-secondary border-none">
+          <app-cart-item 
+          *ngFor="let cartItem of cartItems" 
+          [cartItem]="cartItem" 
+          (removeFromCartEvent)="removeFromCart($event)" 
+          (increaseQuantityEvent)="increaseQuantity($event)"
+          (decreaseQuantityEvent)="decreaseQuantity($event)"
+          ></app-cart-item>
+        </ol>
+        <div class="d-flex justify-content-between" *ngIf="totalAmount!==0">
+          <p class="display-6 mt-3">Total :{{this.totalAmount}} EUR</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
